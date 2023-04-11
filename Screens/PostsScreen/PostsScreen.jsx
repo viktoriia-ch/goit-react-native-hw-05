@@ -1,44 +1,25 @@
-import { View, Image, Text, StyleSheet } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import DefaultScreen from "../../nestedScreens/DefaultScreen/DefaultScreen";
+import MapScreen from "../../nestedScreens/MapScreen/MapScreen";
+import CommentsScreen from "../../nestedScreens/CommentsScreen/CommentsScreen";
+
+const NestedScreens = createStackNavigator();
 
 const PostsScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.infoBlock}>
-        <Image source={require("../../assets/images/User.png")} />
-        <View style={styles.textBlock}>
-          <Text style={styles.name}>Natali Romanova</Text>
-          <Text style={styles.email}>email@example.com</Text>
-        </View>
-      </View>
-    </View>
+    <NestedScreens.Navigator>
+      <NestedScreens.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="DefaultScreen"
+        component={DefaultScreen}
+      />
+      <NestedScreens.Screen name="Map" component={MapScreen} />
+      <NestedScreens.Screen name="Comments" component={CommentsScreen} />
+    </NestedScreens.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    backgroundColor: "#FFFFFF",
-  },
-
-  infoBlock: {
-    flexDirection: "row",
-    width: 230,
-    height: 60,
-    marginLeft: 16,
-    marginTop: 32,
-  },
-
-  textBlock: {
-    marginLeft: 8,
-    alignSelf: "center",
-  },
-
-  name: {
-    color: "#212121",
-    fontWeight: 700,
-  },
-});
 
 export default PostsScreen;
